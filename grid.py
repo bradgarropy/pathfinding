@@ -4,10 +4,13 @@ grid.py
 Module for creating and manipulating two dimensional grids.
 
     create_grid(width, height)
-        Creates a grid of the given width and height initialized with zeros.
+        Creates and initializes a grid of the provided length and width.
 
     draw_grid(grid)
-        Draws the provided grid.
+        Prints the given grid and its values to standard out.
+
+    add_obstacles(grid, density)
+        Adds impassable obstacles to the grid.
 """
 
 
@@ -15,21 +18,17 @@ def create_grid(width, height):
     """
     Creates and initializes a grid of the provided length and width.
 
-    width	-- Width of the grid
-    height	-- Height of the grid
+    Arguments:
+    width  -- Width of the grid
+    height -- Height of the grid
 
-    Returns a list of lists representing a grid. All values are initialized to
-    zero. The grid can be accessed by using the following notation:
+    Returns:
+    grid -- A list of lists representing a grid with all values are initialized
+            to zero.
+
+    The grid can be accessed by using the following notation:
 
         grid[x][y]
-
-    You can visualize the graph as shown below. The origin is at the top left.
-
-        [1, 2, 3]
-        [4, 5, 6]
-        [7, 8, 9]
-
-    In the example grid shown above, grid[0][0] would return 1.
     """
 
     # create a two dimensional list of lists initialized to zero
@@ -42,23 +41,11 @@ def draw_grid(grid):
     """
     Prints the given grid and its values to standard out.
 
+    Arguments:
     grid -- A list of lists representing a grid
 
-    Returns nothing. Take the example grid listed below.
-
-        grid=[[1,2,3],
-              [4,5,6],
-              [7,8,9]]
-
-    This grid would be printed as follows.
-
-        -------------
-        | 1 | 2 | 3 |
-        |---|---|---|
-        | 4 | 5 | 6 |
-        |---|---|---|
-        | 7 | 8 | 9 |
-        -------------
+    Returns:
+    None
     """
 
     # calculate the width and height of the grid
@@ -80,3 +67,39 @@ def draw_grid(grid):
 
     # print bottom bar
     print "----" * width + "-"
+
+
+def add_obstacles(grid, density):
+    """
+    Adds impassable obstacles to the grid.
+
+    Arguments:
+    grid    -- A list of lists representing a grid
+    density -- Integer between 0 and 100 representing the percent of grid
+               spaces to be marked as obstacles.
+
+    Returns:
+    grid -- The provided grid with some spaces marked as obstacles based on the
+            density percentage. Obstacles in the grid are denoted by a '1'.
+
+    This function only adds obstacles based on the density, it does not reset
+    the obstacle density of a grid.
+    """
+
+    import random
+
+    # calculate the width and height of the grid
+    width = len(grid[0])
+    height = len(grid)
+
+    # iterate over rows and columns
+    for row in range(height):
+        for column in range(width):
+
+            # if randomly generated number is within the density percentage,
+            # set the grid space to '1' to indicate an obstacle
+            if random.randint(0, 100) < density:
+                grid[row][column] = 1
+                print "changed grid[%d][%d] to 1" % (row, column)
+
+    return grid
