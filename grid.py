@@ -13,6 +13,8 @@ Module for creating and manipulating two dimensional grids.
         Adds impassable obstacles to the grid.
 """
 
+__version__ = "0.0.1"
+
 
 def create_grid(width, height):
     """
