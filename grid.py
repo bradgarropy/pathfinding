@@ -16,6 +16,14 @@ Module for creating and manipulating two dimensional grids.
 __version__ = "0.0.1"
 
 
+class Grid(object):
+    """Class for creating and manipulating two dimensional grids."""
+
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+
 def create_grid(width, height):
     """
     Creates and initializes a grid of the provided length and width.
