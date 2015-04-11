@@ -43,5 +43,9 @@ class Node(object):
     def distance(self, coords):
         """ Calculates the distance to a particular point. """
 
-        # TODO: Implement this method.
-        pass
+        x_dest = coords[0]
+        y_dest = coords[1]
+
+        distance = abs(self.x_coord - x_dest) + abs(self.y_coord - y_dest)
+
+        return distance
