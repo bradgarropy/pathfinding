@@ -2,18 +2,9 @@
 grid.py
 
 Module for creating and manipulating two dimensional grids.
-
-    create_grid(width, height)
-        Creates and initializes a grid of the provided length and width.
-
-    draw_grid(grid)
-        Prints the given grid and its values to standard out.
-
-    add_obstacles(grid, density)
-        Adds impassable obstacles to the grid.
 """
 
-__version__ = "0.0.1"
+import node as n
 
 
 class Grid(object):
@@ -22,94 +13,67 @@ class Grid(object):
     def __init__(self, width, height):
         self.width = width
         self.height = height
+        self.nodes = {}
 
+        # create a node object for every point on the grid
+        for row in range(self.height):
+            for column in range(self.width):
+                new_node = n.Node(row, column)
+                self.nodes[(row, column)] = new_node
 
-def create_grid(width, height):
-    """
-    Creates and initializes a grid of the provided length and width.
+    def in_bounds(self, node):
+        """ Determines if a grid node is in bounds. """
 
-    Arguments:
-    width  -- Width of the grid
-    height -- Height of the grid
+        within_width = (0 <= node.x_coord < self.width)
+        within_height = (0 <= node.y_coord < self.height)
 
-    Returns:
-    grid -- A list of lists representing a grid with all values are initialized
-            to zero.
+        return within_width and within_height
 
-    The grid can be accessed by using the following notation:
+    def draw(self):
+        """ Draws the grid and its node values. """
 
-        grid[x][y]
-    """
+        for row in range(self.height):
+            for column in range(self.width):
+                print self.nodes[(row, column)].value,
+            print
 
-    # create a two dimensional list of lists initialized to zero
-    grid = [[0 for _ in range(width)] for _ in range(height)]
+    def add_obstacles(self, density):
+        """ Add impassable obstacles to the grid. """
 
-    return grid
+        import random
 
+        # determine if each node should be changed to an obstacle
+        for row in range(self.height):
+            for column in range(self.width):
+                if random.randint(0, 100) < density:
+                    self.nodes[(row, column)].value = "W"
 
-def draw_grid(grid):
-    """
-    Prints the given grid and its values to standard out.
+    def remove_obstacles(self):
+        """ Removes all obstacles from the grid. """
 
-    Arguments:
-    grid -- A list of lists representing a grid
+        # TODO: Implement this method.
+        pass
 
-    Returns:
-    None
-    """
+    def add_row(self):
+        """ Adds a row to the grid. """
 
-    # calculate the width and height of the grid
-    width = len(grid[0])
-    height = len(grid)
+        # TODO: Implement this method.
+        pass
 
-    # print top bar
-    print "----" * width + "-"
+    def add_column(self):
+        """ Adds a column to the grid. """
 
-    # iterate over rows and columns
-    for row in range(height):
-        for column in range(width):
-            print("| %d" % grid[row][column]),
-        print "|"
+        # TODO: Implement this method.
+        pass
 
-        # print row separator unless it's the last row
-        if row != (height - 1):
-            print "|---" * width + "|"
+    def remove_row(self):
+        """ Removes a row from the grid. """
 
-    # print bottom bar
-    print "----" * width + "-"
+        # TODO: Implement this method.
+        pass
 
+    def remove_column(self):
+        """ Removes a column from the grid. """
 
-def add_obstacles(grid, density):
-    """
-    Adds impassable obstacles to the grid.
-
-    Arguments:
-    grid    -- A list of lists representing a grid
-    density -- Integer between 0 and 100 representing the percent of grid
-               spaces to be marked as obstacles.
-
-    Returns:
-    grid -- The provided grid with some spaces marked as obstacles based on the
-            density percentage. Obstacles in the grid are denoted by a '1'.
-
-    This function only adds obstacles based on the density, it does not reset
-    the obstacle density of a grid.
-    """
-
-    import random
-
-    # calculate the width and height of the grid
-    width = len(grid[0])
-    height = len(grid)
-
-    # iterate over rows and columns
-    for row in range(height):
-        for column in range(width):
-
-            # if randomly generated number is within the density percentage,
-            # set the grid space to '1' to indicate an obstacle
-            if random.randint(0, 100) < density:
-                grid[row][column] = 1
-                print "changed grid[%d][%d] to 1" % (row, column)
-
-    return grid
+        # TODO: Implement this method.
+        pass
