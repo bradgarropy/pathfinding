@@ -37,43 +37,44 @@ class Grid(object):
                 print self.nodes[(row, column)].value,
             print
 
-    def add_obstacles(self, density):
+    def add_obstacles(self, density=None, obstacles=None):
         """ Add impassable obstacles to the grid. """
 
-        import random
+        # if density argument is provided
+        if density is not None:
+            import random
 
-        # determine if each node should be changed to an obstacle
-        for row in range(self.height):
-            for column in range(self.width):
-                if random.randint(0, 100) < density:
-                    self.nodes[(row, column)].value = "W"
+            # determine if each node should be changed to an obstacle
+            for row in range(self.height):
+                for column in range(self.width):
+                    if random.randint(0, 100) < density:
+                        self.nodes[(row, column)].value = "W"
+                        print "Added obstacle at (%d, %d)" % (row, column)
 
-    def remove_obstacles(self):
-        """ Removes all obstacles from the grid. """
+        # if obstacles argument is provided
+        if obstacles is not None:
+            for obstacle in obstacles:
+                x_coord = obstacle[0]
+                y_coord = obstacle[1]
 
-        # TODO: Implement this method.
-        pass
+                self.nodes[(x_coord, y_coord)].value = "W"
+                print "Added obstacle at (%d, %d)" % (x_coord, y_coord)
 
-    def add_row(self):
-        """ Adds a row to the grid. """
+    def remove_obstacles(self, obstacles=None):
+        """ Removes obstacles from the grid. """
 
-        # TODO: Implement this method.
-        pass
+        # if obstacles argument is provided
+        if obstacles is not None:
+            for obstacle in obstacles:
+                x_coord = obstacle[0]
+                y_coord = obstacle[1]
 
-    def add_column(self):
-        """ Adds a column to the grid. """
-
-        # TODO: Implement this method.
-        pass
-
-    def remove_row(self):
-        """ Removes a row from the grid. """
-
-        # TODO: Implement this method.
-        pass
-
-    def remove_column(self):
-        """ Removes a column from the grid. """
-
-        # TODO: Implement this method.
-        pass
+                self.nodes[(x_coord, y_coord)].value = 0
+                print "Removed obstacle at (%d, %d)" % (x_coord, y_coord)
+        else:
+            # if no argument is provided, remove all obstacles
+            for row in range(self.height):
+                for column in range(self.width):
+                    if not self.nodes[(row, column)].passable():
+                        self.nodes[(row, column)].value = 0
+                        print "Removed obstacle at (%d, %d)" % (row, column)
