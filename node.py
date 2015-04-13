@@ -18,23 +18,6 @@ class Node(object):
 
         return self.value
 
-    def neighbors(self):
-        """ Lists a node's neighbors. """
-
-        neighbors = []
-
-        top = (self.x_coord, self.y_coord + 1)
-        bottom = (self.x_coord, self.y_coord - 1)
-        left = (self.x_coord - 1, self.y_coord)
-        right = (self.x_coord + 1, self.y_coord)
-
-        neighbors.append(top)
-        neighbors.append(bottom)
-        neighbors.append(left)
-        neighbors.append(right)
-
-        return neighbors
-
     def passable(self):
         """ Determines if a node is passable. """
 
