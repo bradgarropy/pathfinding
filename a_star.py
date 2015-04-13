@@ -5,9 +5,10 @@ Module which implements the A* pathfinding algorithm.
 """
 
 import Queue
+import grid as g
 
 
-def a_star(start, end):
+def a_star(grid, start, end):
     """ Uses the A* algorithm to find a path from start to end. """
 
     frontier = Queue.PriorityQueue()
@@ -28,7 +29,7 @@ def a_star(start, end):
             break
 
         # explore the current node's neighbors
-        for neighbor in current.neighbors():
+        for neighbor in grid.neighbors(current):
 
             # only consider the node if it is passable
             if neighbor.passable():
@@ -44,7 +45,7 @@ def a_star(start, end):
                     parent[neighbor] = current
 
                     # place in appropriate spot in the frontier
-                    priority = new_cost + neighbor.distance(node=end)
+                    priority = new_cost + g.distance(neighbor, end)
                     frontier.put(neighbor, priority)
 
     return parent
