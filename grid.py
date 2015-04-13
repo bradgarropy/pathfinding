@@ -78,3 +78,14 @@ class Grid(object):
                     if not self.nodes[(row, column)].passable():
                         self.nodes[(row, column)].value = 0
                         print "Removed obstacle at (%d, %d)" % (row, column)
+
+
+def distance(start_node, end_node):
+    """ Calculates the distance to a particular Node. """
+
+    x_dist = abs(start_node.x_coord - end_node.x_coord)
+    y_dist = abs(start_node.y_coord - end_node.y_coord)
+
+    result = x_dist + y_dist
+
+    return result

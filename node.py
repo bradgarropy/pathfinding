@@ -39,27 +39,3 @@ class Node(object):
         """ Determines if a node is passable. """
 
         return self.value != "W"
-
-    def distance(self, coords=None, node=None):
-        """ Calculates the distance to a particular point or Node. """
-
-        # handle no argument case
-        if coords is None and node is None:
-            return 0
-
-        # if coords argument is provided
-        if coords is not None:
-            x_coord = coords[0]
-            y_coord = coords[1]
-
-        # if node argument is provided
-        if node is not None:
-            x_coord = node.x_coord
-            y_coord = node.y_coord
-
-        x_dist = abs(self.x_coord - x_coord)
-        y_dist = abs(self.y_coord - y_coord)
-
-        distance = x_dist + y_dist
-
-        return distance
