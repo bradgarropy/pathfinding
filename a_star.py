@@ -1,7 +1,7 @@
 """
-a_star.py
+pathfinding.py
 
-Module which implements the A* pathfinding algorithm.
+Module which implements multiple pathfinding algorithms.
 """
 
 import Queue
