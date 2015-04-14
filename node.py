@@ -14,7 +14,13 @@ class Node(object):
         self.value = value
 
     def __str__(self):
-        return str(self.__dict__)
+        x_coord = "x_coord: %d" % self.x_coord
+        y_coord = "y_coord: %d" % self.y_coord
+        value = "value: %s" % self.value
+
+        result = "%s, %s, %s" % (x_coord, y_coord, value)
+
+        return result
 
     def draw(self):
         """ Draws a node's value. """
