@@ -48,4 +48,16 @@ def a_star(grid, start, end):
                     priority = new_cost + g.distance(neighbor, end)
                     frontier.put(neighbor, priority)
 
-    return parent
+    # initialize the path with the end node
+    path = [end]
+
+    # construct the path based off the parents dictionary
+    current = end
+    while current != start:
+        current = parent[current]
+        path.append(current)
+
+    # reverse the path to go from start to end
+    path.reverse()
+
+    return path
