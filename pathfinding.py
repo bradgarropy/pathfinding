@@ -32,7 +32,7 @@ def a_star(grid, start, end):
         for neighbor in grid.neighbors(current):
 
             # only consider the node if it is passable
-            if neighbor.passable():
+            if grid.nodes[neighbor].passable():
 
                 # calculate the cost to reach the neighbor
                 new_cost = cost[current] + 1
