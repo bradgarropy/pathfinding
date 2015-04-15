@@ -18,8 +18,8 @@ class Grid(object):
         # create a node object for every point on the grid
         for row in range(self.height):
             for column in range(self.width):
-                new_node = n.Node(row, column)
-                self.nodes[(row, column)] = new_node
+                new_node = n.Node(column, row)
+                self.nodes[(column, row)] = new_node
 
     def in_bounds(self, coords):
         """ Determines if a grid node is in bounds. """
@@ -68,7 +68,7 @@ class Grid(object):
 
         for row in range(self.height):
             for column in range(self.width):
-                print self.nodes[(row, column)].value,
+                print self.nodes[(column, row)].value,
             print
 
     def add_obstacles(self, density=None, obstacles=None):
@@ -82,8 +82,8 @@ class Grid(object):
             for row in range(self.height):
                 for column in range(self.width):
                     if random.randint(0, 100) < density:
-                        self.nodes[(row, column)].value = "W"
-                        print "Added obstacle at (%d, %d)" % (row, column)
+                        self.nodes[(column, row)].value = "#"
+                        print "Added obstacle at (%d, %d)" % (column, row)
 
         # if obstacles argument is provided
         if obstacles is not None:
@@ -91,7 +91,7 @@ class Grid(object):
                 x_coord = obstacle[0]
                 y_coord = obstacle[1]
 
-                self.nodes[(x_coord, y_coord)].value = "W"
+                self.nodes[(x_coord, y_coord)].value = "#"
                 print "Added obstacle at (%d, %d)" % (x_coord, y_coord)
 
     def remove_obstacles(self, obstacles=None):
@@ -109,9 +109,9 @@ class Grid(object):
             # if no argument is provided, remove all obstacles
             for row in range(self.height):
                 for column in range(self.width):
-                    if not self.nodes[(row, column)].passable():
-                        self.nodes[(row, column)].value = 0
-                        print "Removed obstacle at (%d, %d)" % (row, column)
+                    if not self.nodes[(column, row)].passable():
+                        self.nodes[(column, row)].value = 0
+                        print "Removed obstacle at (%d, %d)" % (column, row)
 
 
 def distance(start_node, end_node):

@@ -8,7 +8,7 @@ Module for defining a graph node and its contents.
 class Node(object):
     """ Class for defining a graph node and its contents. """
 
-    def __init__(self, x_coord, y_coord, value=0):
+    def __init__(self, x_coord, y_coord, value="."):
         self.x_coord = x_coord
         self.y_coord = y_coord
         self.value = value
@@ -30,4 +30,4 @@ class Node(object):
     def passable(self):
         """ Determines if a node is passable. """
 
-        return self.value != "W"
+        return self.value != "#"
