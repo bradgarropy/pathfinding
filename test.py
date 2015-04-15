@@ -44,3 +44,19 @@ grid.nodes[end].value = "X"
 print
 grid.draw()
 print
+
+# use A* to find the path
+path = pf.a_star(grid, start, end)
+
+# print the path and the node values
+for coord in path:
+    print grid.nodes[coord]
+
+# mark the path on the grid
+for coord in path:
+    if (coord != start) and (coord != end):
+        grid.nodes[coord].value = "+"
+
+print
+grid.draw()
+print
