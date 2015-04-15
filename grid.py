@@ -22,7 +22,7 @@ class Grid(object):
                 self.nodes[(column, row)] = new_node
 
     def in_bounds(self, coords):
-        """ Determines if a grid node is in bounds. """
+        """ Determines if a point is in bounds. """
 
         # determine x and y coordinate values
         x_coord = coords[0]
@@ -37,29 +37,29 @@ class Grid(object):
 
         return result
 
-    def neighbors(self, node):
-        """ Lists a node's neighbors. """
+    def neighbors(self, coords):
+        """ Lists the neighbors for a given point. """
 
-        coords = []
         neighbors = []
 
+        # determine x and y coordinate values
+        x_coord = coords[0]
+        y_coord = coords[1]
+
         # gather all possible neighbor coordinates
-        top_coords = (node.x_coord, node.y_coord + 1)
-        bottom_coords = (node.x_coord, node.y_coord - 1)
-        left_coords = (node.x_coord - 1, node.y_coord)
-        right_coords = (node.x_coord + 1, node.y_coord)
+        top = (x_coord, y_coord + 1)
+        bottom = (x_coord, y_coord - 1)
+        left = (x_coord - 1, y_coord)
+        right = (x_coord + 1, y_coord)
 
         # add all possible neighbor coordinates to list
-        coords.append(top_coords)
-        coords.append(bottom_coords)
-        coords.append(left_coords)
-        coords.append(right_coords)
+        neighbors.append(top)
+        neighbors.append(bottom)
+        neighbors.append(left)
+        neighbors.append(right)
 
         # remove out of bounds coordinates
-        coords = [coord for coord in coords if self.in_bounds(coord)]
-
-        # identify neighbors for remaining in bounds coordinates
-        neighbors = [self.nodes[coord] for coord in coords]
+        neighbors = [coord for coord in neighbors if self.in_bounds(coord)]
 
         return neighbors
 
