@@ -114,12 +114,22 @@ class Grid(object):
                         print "Removed obstacle at (%d, %d)" % (column, row)
 
 
-def distance(start_node, end_node):
+def distance(start_coords, end_coords):
     """ Calculates the distance to a particular Node. """
 
-    x_dist = abs(start_node.x_coord - end_node.x_coord)
-    y_dist = abs(start_node.y_coord - end_node.y_coord)
+    # determine the start x and y coordinate values
+    x_start = start_coords[0]
+    y_start = start_coords[1]
 
+    # determine the end x and y coordinate values
+    x_end = end_coords[0]
+    y_end = end_coords[1]
+
+    # calculate the distance along each axis
+    x_dist = abs(x_start - x_end)
+    y_dist = abs(y_start - y_end)
+
+    # calculate the total distance
     result = x_dist + y_dist
 
     return result
