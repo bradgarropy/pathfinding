@@ -4,34 +4,34 @@ pathfinding.py
 Module which implements multiple pathfinding algorithms.
 """
 
-import Queue
+import Queue as q
 import grid as g
 
 
 def a_star(grid, start, end):
     """ Uses the A* algorithm to find a path from start to end. """
 
-    frontier = Queue.PriorityQueue()
+    frontier = q.PriorityQueue()
     parent = {}
     cost = {}
 
-    # initialize start node's values
-    frontier.put(start, 0)
+    # initialize start point's values
+    frontier.put((0, start))
     parent[start] = None
     cost[start] = 0
 
     while not frontier.empty():
-        # pick the top priority node in the frontier
-        current = frontier.get()
+        # pick the top priority point in the frontier
+        current = frontier.get()[1]
 
         # exit if end is found
         if current == end:
             break
 
-        # explore the current node's neighbors
+        # explore the current point's neighbors
         for neighbor in grid.neighbors(current):
 
-            # only consider the node if it is passable
+            # only consider the point if it is passable
             if grid.nodes[neighbor].passable():
 
                 # calculate the cost to reach the neighbor
@@ -46,9 +46,9 @@ def a_star(grid, start, end):
 
                     # place in appropriate spot in the frontier
                     priority = new_cost + g.distance(neighbor, end)
-                    frontier.put(neighbor, priority)
+                    frontier.put((priority, neighbor))
 
-    # initialize the path with the end node
+    # initialize the path with the end point
     path = [end]
 
     # construct the path based off the parents dictionary
