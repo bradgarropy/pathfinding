@@ -10,11 +10,24 @@ import random
 import pathfinding as pf
 import grid as g
 
-# select a random width and height
-width = random.randint(1, 75)
-height = random.randint(1, 75)
+print "Input a width and height for the grid."
+print "Alternatively, just press <Enter> for random values.\n"
 
-print "Dimensions: %d x %d" % (width, height)
+# take user input for width and height
+width = raw_input("width: ")
+height = raw_input("height: ")
+
+# select a random width and height if none were input
+if not width:
+    width = random.randint(1, 75)
+else:
+    width = int(width)
+if not height:
+    height = random.randint(1, 75)
+else:
+    height = int(height)
+
+print "\nDimensions: %d x %d" % (width, height)
 
 # create a grid using the random dimensions
 grid = g.Grid(width, height)
@@ -23,18 +36,34 @@ print
 grid.draw()
 print
 
-# select random start coordinates
-start_x = random.randint(0, width - 1)
-start_y = random.randint(0, height - 1)
+print "Input start and end coordinates for pathfinding."
+print "Alternatively, just press <Enter> for random values.\n"
+
+# take user input for width and height
+start_x = raw_input("starting x: ")
+start_y = raw_input("starting y: ")
+end_x = raw_input("ending x: ")
+end_y = raw_input("ending y: ")
+
+# select random start and end coordinates if none were input
+if not start_x and not start_y:
+    start_x = random.randint(0, width - 1)
+    start_y = random.randint(0, height - 1)
+else:
+    start_x = int(start_x)
+    start_y = int(start_y)
+if not end_x and not end_y:
+    end_x = random.randint(0, width - 1)
+    end_y = random.randint(0, height - 1)
+else:
+    end_x = int(end_x)
+    end_y = int(end_y)
+
+# construct the start and end coordinates
 start = (start_x, start_y)
-
-print "Start: %s" % str(start)
-
-# select random end coordinates
-end_x = random.randint(0, width - 1)
-end_y = random.randint(0, height - 1)
 end = (end_x, end_y)
 
+print "\nStart: %s" % str(start)
 print "End: %s" % str(end)
 
 # mark the start and end nodes on the grid
