@@ -47,16 +47,16 @@ class Grid(object):
         y_coord = coords[1]
 
         # gather all possible neighbor coordinates
-        top = (x_coord, y_coord + 1)
-        bottom = (x_coord, y_coord - 1)
+        top = (x_coord, y_coord - 1)
+        bottom = (x_coord, y_coord + 1)
         left = (x_coord - 1, y_coord)
         right = (x_coord + 1, y_coord)
 
         # add all possible neighbor coordinates to list
-        neighbors.append(top)
-        neighbors.append(bottom)
-        neighbors.append(left)
         neighbors.append(right)
+        neighbors.append(top)
+        neighbors.append(left)
+        neighbors.append(bottom)
 
         # remove out of bounds coordinates
         neighbors = [coord for coord in neighbors if self.in_bounds(coord)]
@@ -83,7 +83,6 @@ class Grid(object):
                 for column in range(self.width):
                     if random.randint(0, 100) < density:
                         self.nodes[(column, row)].value = "#"
-                        print "Added obstacle at (%d, %d)" % (column, row)
 
         # if obstacles argument is provided
         if obstacles is not None:
@@ -92,7 +91,6 @@ class Grid(object):
                 y_coord = obstacle[1]
 
                 self.nodes[(x_coord, y_coord)].value = "#"
-                print "Added obstacle at (%d, %d)" % (x_coord, y_coord)
 
     def remove_obstacles(self, obstacles=None):
         """ Removes obstacles from the grid. """
@@ -104,14 +102,12 @@ class Grid(object):
                 y_coord = obstacle[1]
 
                 self.nodes[(x_coord, y_coord)].value = 0
-                print "Removed obstacle at (%d, %d)" % (x_coord, y_coord)
         else:
             # if no argument is provided, remove all obstacles
             for row in range(self.height):
                 for column in range(self.width):
                     if not self.nodes[(column, row)].passable():
                         self.nodes[(column, row)].value = 0
-                        print "Removed obstacle at (%d, %d)" % (column, row)
 
 
 def distance(start_coords, end_coords):
