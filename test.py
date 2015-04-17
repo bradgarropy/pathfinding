@@ -29,8 +29,29 @@ else:
 
 print "\nDimensions: %d x %d" % (width, height)
 
-# create a grid using the random dimensions
+# create a grid
 grid = g.Grid(width, height)
+
+print
+grid.draw()
+print
+
+print "Input a wall density for the grid."
+print "Alternatively, just press <Enter> for a random value.\n"
+
+# take user input for wall density
+density = raw_input("wall density: ")
+
+# select a random wall density if one was not provided
+if not density:
+    density = random.randint(0, 100)
+else:
+    density = int(density)
+
+print "\nWall Density: %d" % density
+
+# add walls to the grid
+grid.add_obstacles(density)
 
 print
 grid.draw()
