@@ -5,6 +5,7 @@ Module for creating and manipulating two dimensional grids.
 """
 
 import node as n
+import math
 
 
 class Grid(object):
@@ -53,10 +54,10 @@ class Grid(object):
         right = (x_coord + 1, y_coord)
 
         # add all possible neighbor coordinates to list
-        neighbors.append(right)
         neighbors.append(top)
-        neighbors.append(left)
         neighbors.append(bottom)
+        neighbors.append(left)
+        neighbors.append(right)
 
         # remove out of bounds coordinates
         neighbors = [coord for coord in neighbors if self.in_bounds(coord)]
@@ -125,7 +126,7 @@ def distance(start_coords, end_coords):
     x_dist = abs(x_start - x_end)
     y_dist = abs(y_start - y_end)
 
-    # calculate the total distance
-    result = x_dist + y_dist
+    # calculate the total distance using the Pythagorean Theorem
+    result = math.sqrt(x_dist**2 + y_dist**2)
 
     return result
