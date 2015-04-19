@@ -107,6 +107,10 @@ for coord in path:
     if (coord != start) and (coord != end):
         grid.nodes[coord].value = "+"
 
-print
-grid.draw()
-print
+# print the results on the grid
+if not path:
+    print "No path found."
+else:
+    print
+    grid.draw()
+    print
