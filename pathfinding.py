@@ -55,6 +55,7 @@ def a_star(grid, start, end):
     current = end
     while current != start:
         
+        # no path exists if current node does not have a parent
         if current in parent:
             current = parent[current]
             path.append(current)
