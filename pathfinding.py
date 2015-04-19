@@ -54,8 +54,13 @@ def a_star(grid, start, end):
     # construct the path based off the parents dictionary
     current = end
     while current != start:
-        current = parent[current]
-        path.append(current)
+        
+        if current in parent:
+            current = parent[current]
+            path.append(current)
+        else:
+            path = []
+            break
 
     # reverse the path to go from start to end
     path.reverse()
