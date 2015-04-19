@@ -54,7 +54,7 @@ def a_star(grid, start, end):
     # construct the path based off the parents dictionary
     current = end
     while current != start:
-        
+
         # no path exists if current node does not have a parent
         if current in parent:
             current = parent[current]
