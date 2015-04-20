@@ -1,2 +1,5 @@
 #Python Bytecode
 *.pyc
+
+#Generated Output
+grid.html
