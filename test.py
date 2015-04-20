@@ -5,6 +5,7 @@ Test module for the pathfinding algorithms.
 """
 
 import random
+import os
 
 # import modules to test
 import pathfinding as pf
@@ -88,7 +89,7 @@ print "\nStart: %s" % str(start)
 print "End: %s" % str(end)
 
 # mark the start and end nodes on the grid
-grid.nodes[start].value = "0"
+grid.nodes[start].value = "O"
 grid.nodes[end].value = "X"
 
 print
@@ -110,7 +111,15 @@ for coord in path:
 # print the results on the grid
 if not path:
     print "No path found."
-else:
-    print
-    grid.draw()
-    print
+
+print
+html = grid.draw()
+print
+
+# write the html to a file
+result = open("grid.html", "w")
+result.write(html)
+result.close()
+
+# open the html file
+os.startfile("grid.html")
