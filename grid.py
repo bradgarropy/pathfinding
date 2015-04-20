@@ -67,10 +67,50 @@ class Grid(object):
     def draw(self):
         """ Draws the grid and its node values. """
 
+        # draws a text representation to the console
         for row in range(self.height):
             for column in range(self.width):
                 print self.nodes[(column, row)].value,
             print
+
+        # creates an HTML representation of the grid
+        html = ""
+
+        html += "<!DOCTYPE html>\n"
+        html += "<html lang=\"en\">\n"
+        html += "<head>\n"
+        html += "<style>\n"
+        html += "table, td {\n"
+        html += "    border: 2px solid black;\n"
+        html += "    border-collapse: collapse;\n"
+        html += "    padding: 20px;\n"
+        html += "}\n"
+        html += "</style>\n"
+        html += "</head>\n"
+        html += "<body>\n"
+        html += "<table>\n"
+
+        # sets the color based on node value
+        for row in range(self.height):
+            html += "<tr>\n"
+            for column in range(self.width):
+                if self.nodes[(column, row)].value == ".":
+                    html += "<td bgcolor=\"white\"></td>\n"
+                if self.nodes[(column, row)].value == "#":
+                    html += "<td bgcolor=\"gray\"></td>\n"
+                if self.nodes[(column, row)].value == "O":
+                    html += "<td bgcolor=\"green\"></td>\n"
+                if self.nodes[(column, row)].value == "X":
+                    html += "<td bgcolor=\"red\"></td>\n"
+                if self.nodes[(column, row)].value == "+":
+                    html += "<td bgcolor=\"yellow\"></td>\n"
+            html += "</tr>\n"
+
+        html += "</table>\n"
+        html += "</body>\n"
+        html += "</html>\n"
+
+        return html
 
     def add_obstacles(self, density=None, obstacles=None):
         """ Add impassable obstacles to the grid. """
